@@ -1,0 +1,17 @@
+cmake_minimum_required(VERSION 2.8)
+SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+# add this options before PROJECT keyword
+# set(CMAKE_DISABLE_SOURCE_CHANGES ON)
+# set(CMAKE_DISABLE_IN_SOURCE_BUILD ON)
+project(SpreadOption)
+set(CMAKE_CXX_COMPILER "/opt/local/bin/g++")
+include_directories(/opt/local/include ../) 
+link_directories(${BOOST_ROOT}/lib)
+set(Boost_USE_STATIC_LIBS ON)
+set(Boost_USE_MULTITHREADED OFF) 
+set(Boost_USE_STATIC_RUNTIME OFF)
+find_package(Boost COMPONENTS system thread serialization)
+file(GLOB ALL_CPP_SRCS src/*.cpp)
+add_executable(SpreadOptionMonteCarlo ${ALL_CPP_SRCS}) 
+target_link_libraries(SpreadOptionMonteCarlo ${Boost_LIBRARIES} )
+
